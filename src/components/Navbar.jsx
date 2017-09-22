@@ -17,7 +17,7 @@ class Navbar extends Component {
           <Menu.Item as={Link} to="/auth/signin">
             Sign In
           </Menu.Item>
-          <Menu.Item as={Link} to="/auth/register">
+          <Menu.Item as={Link} to="/auth/signup">
             Sign Up
           </Menu.Item>
         </Menu.Menu>

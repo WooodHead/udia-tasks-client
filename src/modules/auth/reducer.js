@@ -45,7 +45,7 @@ function authReducer(state = initialState, action) {
     case SET_AUTH_REQUEST_SUCCESS:
       return {
         ...state,
-        authRequestSuccess: ""
+        authRequestSuccess: action.data
       };
     case CLEAR_AUTH_REQUEST_SUCCESS:
       return {

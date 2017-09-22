@@ -7,12 +7,14 @@ import {
   clearAuthRequestError,
   clearAuthRequestSuccess,
   setAuthFormEmail,
-  setAuthFormPassword
+  setAuthFormUsername,
+  setAuthFormPassword,
+  setAuthFormPasswordConfirmation
 } from "../../modules/auth/reducer.actions";
-import { loginRequest } from "../../modules/auth/sagas.actions";
+import { registerRequest } from "../../modules/auth/sagas.actions";
 import Error from "../Shared/Error";
 
-class SignIn extends Component {
+class SignUp extends Component {
   componentWillUnmount() {
     this.props.dispatch(clearAuthRequestError());
     this.props.dispatch(clearAuthRequestSuccess());
@@ -22,15 +24,30 @@ class SignIn extends Component {
     this.props.dispatch(setAuthFormEmail(event.target.value));
   };
 
+  changeUsername = event => {
+    this.props.dispatch(setAuthFormUsername(event.target.value));
+  };
+
   changePassword = event => {
     this.props.dispatch(setAuthFormPassword(event.target.value));
+  };
+
+  changePasswordConfirmation = event => {
+    this.props.dispatch(setAuthFormPasswordConfirmation(event.target.value));
   };
 
   onSubmit = event => {
     event.preventDefault();
     const { dispatch, auth } = this.props;
-    const { email, password } = auth;
-    dispatch(loginRequest({ email, password }));
+    const { email, username, password, passwordConfirmation } = auth;
+    dispatch(
+      registerRequest({
+        email,
+        username,
+        password1: password,
+        password2: passwordConfirmation
+      })
+    );
   };
 
   render() {
@@ -39,17 +56,23 @@ class SignIn extends Component {
       authRequestError,
       authRequestSuccess,
       email,
-      password
+      username,
+      password,
+      passwordConfirmation
     } = this.props.auth;
     return (
-      <SignInView
+      <SignUpView
         isSendingAuthRequest={isSendingAuthRequest}
         authRequestError={authRequestError}
         authRequestSuccess={authRequestSuccess}
         email={email}
+        username={username}
         password={password}
+        passwordConfirmation={passwordConfirmation}
         changeEmail={this.changeEmail}
+        changeUsername={this.changeUsername}
         changePassword={this.changePassword}
+        changePasswordConfirmation={this.changePasswordConfirmation}
         onSubmit={this.onSubmit}
       />
     );
@@ -60,19 +83,23 @@ function mapStateToProps(state) {
   return { auth: state.auth };
 }
 
-const SignInView = ({
+const SignUpView = ({
   isSendingAuthRequest,
   authRequestError,
   authRequestSuccess,
   email,
+  username,
   password,
+  passwordConfirmation,
   changeEmail,
+  changeUsername,
   changePassword,
+  changePasswordConfirmation,
   onSubmit
 }) => (
   <Grid container={true}>
     <Grid.Column>
-      <Header>Sign In</Header>
+      <Header>Sign Up</Header>
       <Form
         loading={isSendingAuthRequest}
         onSubmit={onSubmit}
@@ -89,6 +116,15 @@ const SignInView = ({
           />
         </Form.Field>
         <Form.Field>
+          <label>Username</label>
+          <input
+            type="text"
+            placeholder="alex"
+            value={username || ""}
+            onChange={changeUsername}
+          />
+        </Form.Field>
+        <Form.Field>
           <label>Password</label>
           <input
             type="password"
@@ -97,25 +133,29 @@ const SignInView = ({
             onChange={changePassword}
           />
         </Form.Field>
-        <Error header="Sign In failed!" error={authRequestError} />
+        <Form.Field>
+          <label>Confirm Password</label>
+          <input
+            type="password"
+            placeholder="••••••••"
+            value={passwordConfirmation || ""}
+            onChange={changePasswordConfirmation}
+          />
+        </Form.Field>
+        <Error header="Sign Up failed!" error={authRequestError} />
         <Message success>
           <Message.Header>Success!</Message.Header>
-          <p>Todo: Localstorage auth token</p>
+          <p>A verification email has been sent to your email address.</p>
         </Message>
-        <Button type="submit">Sign In</Button>
+        <Button type="submit">Sign Up</Button>
       </Form>
       <Message>
         <p>
-          Forgot your password?
-          {" "}
-          <Link to="/auth/forgot-password">Reset it here</Link>
-          .
-          <br />
-          New to us? <Link to="/auth/signup">Sign up</Link>.
+          Already a member? <Link to="/auth/signin">Sign in</Link>.
         </p>
       </Message>
     </Grid.Column>
   </Grid>
 );
 
-export default connect(mapStateToProps)(SignIn);
+export default connect(mapStateToProps)(SignUp);

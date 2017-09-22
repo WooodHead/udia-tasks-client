@@ -5,6 +5,8 @@ import Logo from "./Logo";
 const About = () => (
   <div>
     <Container>
+      <Header as="h2">About</Header>
+      <p>If there is a philosophy to UDIA, it is simply:</p>
       <Segment padded basic textAlign="left">
         <p>You are the Universe.</p>
         <p>The Universe Dreams.</p>
@@ -18,7 +20,6 @@ const About = () => (
       </Segment>
     </Container>
     <Container>
-      <Header as="h2">About</Header>
       <p>Udia is the inverse of Idea.</p>
       <p>
         It is the understanding that
@@ -37,36 +38,7 @@ const About = () => (
         <strong>A</strong>
         wareness.
       </p>
-      <p>It is the natural exploration of solispsim taken to its extreme.</p>
-      <Divider />
-      <Header as="h2">Technical</Header>
-      <p>
-        You are visiting a prototype- an alpha of a site. Chances are good that any data entered will be wiped upon future releases.
-      </p>
-      <List>
-        <List.Item>
-          <List.Icon name="legal" />
-          <List.Content>
-            <a href="https://github.com/udia-software/udia/blob/master/LICENSE">
-              License
-            </a>
-          </List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Icon name="github" />
-          <List.Content>
-            <a href="https://github.com/udia-software/udia">Udia (server)</a>
-          </List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Icon name="github" />
-          <List.Content>
-            <a href="https://github.com/udia-software/udia-client">
-              Udia (browser client)
-            </a>
-          </List.Content>
-        </List.Item>
-      </List>
+      <p>It is an exploration of solipsism and self improvement.</p>
       <Divider />
       <Header as="h2">Contact</Header>
       <List>
