@@ -1,9 +1,5 @@
 # Udia Client
 
-[![Build Status](https://travis-ci.org/udia-software/udia-client.svg?branch=master)](https://travis-ci.org/udia-software/udia-client)
-[![Dependency Status](https://img.shields.io/david/udia-software/udia-client.svg)](https://david-dm.org/udia-software/udia-client)
-[![Dev-Dependency Status](https://img.shields.io/david/dev/udia-software/udia-client.svg)](https://david-dm.org/udia-software/udia-client#info=devDependencies)
-
 ![UDIA](logo.png)
 
 **Universal Dream | Infinite Awareness**
@@ -38,7 +34,7 @@ The environment variables are embedded during the build time. For more informati
 To build the production instance of this application, run the following:
 
 ```bash
-export REACT_APP_API_ENDPOINT="https://udia-server.herokuapp.com/" && yarn build
+export REACT_APP_API_ENDPOINT="https://udia-server.herokuapp.com/api" && yarn build
 ```
 
 You can then serve the production site locally:
@@ -48,11 +44,11 @@ yarn global add serve
 serve -s build --port 3000
 ```
 
-The following script will deploy the application to AWS S3:
+The following script will deploy the contents of `/build` to AWS S3:
 ```bash
-export REACT_APP_API_ENDPOINT="https://udia-server.herokuapp.com/api" && yarn build
-aws s3 sync build/ s3://udia-client
+aws s3 sync build/ s3://udia-client --delete
 ```
+* the `--delete` flag removes the old minified js files that are no longer used.
 
 ## Testing
 
