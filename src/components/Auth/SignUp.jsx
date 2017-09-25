@@ -15,6 +15,10 @@ import { registerRequest } from "../../modules/auth/sagas.actions";
 import Error from "../Shared/Error";
 
 class SignUp extends Component {
+  componentDidMount() {
+    document.title = "Sign Up - UDIA";
+  }
+
   componentWillUnmount() {
     this.props.dispatch(clearAuthRequestError());
     this.props.dispatch(clearAuthRequestSuccess());

@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 
 import ForgotPassword from "./Auth/ForgotPassword";
 import ResetPassword from "./Auth/ResetPassword";
+import Settings from "./Auth/Settings";
 import SignIn from "./Auth/SignIn";
 import SignUp from "./Auth/SignUp";
 import VerifyEmail from "./Auth/VerifyEmail";
@@ -31,6 +32,7 @@ class App extends Component {
             <Route exact path="/auth/forgot-password" component={ForgotPassword} />
             <Route exact path="/auth/reset-password/:uid/:token" component={ResetPassword} />
             <Route exact path="/auth/verify-email/:key" component={VerifyEmail} />
+            <Route exact path="/auth/settings" component={Settings} />
             <Route component={NoMatch} />
           </Switch>
         </div>

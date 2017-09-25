@@ -6,7 +6,8 @@ import {
   EMAIL_VERIFICATION_REQUEST,
   CHANGE_PASSWORD_REQUEST,
   FORGOT_PASSWORD_REQUEST,
-  RESET_PASSWORD_REQUEST
+  RESET_PASSWORD_REQUEST,
+  RETRIEVE_SELF_USER_REQUEST
 } from "./auth/constants";
 import {
   loginFlow,
@@ -15,7 +16,8 @@ import {
   verifyEmailFlow,
   changePasswordFlow,
   forgotPasswordFlow,
-  resetPasswordFlow
+  resetPasswordFlow,
+  retrieveSelfUserFlow
 } from "./auth/sagas";
 
 export default function* rootSaga() {
@@ -27,4 +29,5 @@ export default function* rootSaga() {
   yield effects.takeLatest(CHANGE_PASSWORD_REQUEST, changePasswordFlow);
   yield effects.takeLatest(FORGOT_PASSWORD_REQUEST, forgotPasswordFlow);
   yield effects.takeLatest(RESET_PASSWORD_REQUEST, resetPasswordFlow);
+  yield effects.takeLatest(RETRIEVE_SELF_USER_REQUEST, retrieveSelfUserFlow);
 }

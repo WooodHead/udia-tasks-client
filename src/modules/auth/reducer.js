@@ -5,19 +5,21 @@ import {
   SET_AUTH_REQUEST_SUCCESS,
   CLEAR_AUTH_REQUEST_SUCCESS,
   SET_SELF_USER_TOKEN,
+  SET_SELF_USER,
   SET_AUTH_FORM_EMAIL,
   SET_AUTH_FORM_USERNAME,
   SET_AUTH_FORM_PASSWORD,
   SET_AUTH_FORM_PASSWORD_CONFIRMATION,
   SET_AUTH_FORM_OLD_PASSWORD
 } from "./constants";
-import { me } from "./api";
+import { localToken } from "./api";
 
 const initialState = {
   isSendingAuthRequest: false,
   authRequestError: "",
   authRequestSuccess: "",
-  userToken: me(null),
+  userToken: localToken(null),
+  user: {},
   email: "",
   username: "",
   password: "",
@@ -55,8 +57,13 @@ function authReducer(state = initialState, action) {
     case SET_SELF_USER_TOKEN:
       return {
         ...state,
-        userToken: me(action.data)
+        userToken: localToken(action.data)
       };
+    case SET_SELF_USER:
+      return {
+        ...state,
+        user: action.data
+      }
     case SET_AUTH_FORM_EMAIL:
       return {
         ...state,

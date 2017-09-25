@@ -3,13 +3,12 @@
  * @param {object|string} exception - axios thrown exception
  */
 export function parseError(exception) {
-
   let response = exception.response || {};
   let data = response.data;
   let err = exception.toString();
   if (response.status) {
     err = `${response.status} ${response.statusText}`;
   }
-  console.log(data, err, exception)
+  console.error(exception)
   return data || err;
 }

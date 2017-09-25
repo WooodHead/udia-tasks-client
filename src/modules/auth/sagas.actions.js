@@ -5,7 +5,8 @@ import {
   EMAIL_VERIFICATION_REQUEST,
   CHANGE_PASSWORD_REQUEST,
   FORGOT_PASSWORD_REQUEST,
-  RESET_PASSWORD_REQUEST
+  RESET_PASSWORD_REQUEST,
+  RETRIEVE_SELF_USER_REQUEST
 } from "./constants";
 
 export function loginRequest(postBody) {
@@ -34,4 +35,8 @@ export function forgotPasswordRequest(postBody) {
 
 export function resetPasswordRequest(postBody) {
   return { type: RESET_PASSWORD_REQUEST, data: postBody };
+}
+
+export function retrieveSelfUserRequest() {
+  return { type: RETRIEVE_SELF_USER_REQUEST };
 }

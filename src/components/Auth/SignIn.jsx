@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Button, Form, Grid, Header, Message } from "semantic-ui-react";
 
 import {
@@ -13,6 +13,10 @@ import { loginRequest } from "../../modules/auth/sagas.actions";
 import Error from "../Shared/Error";
 
 class SignIn extends Component {
+  componentDidMount() {
+    document.title = "Sign In - UDIA";
+  }
+
   componentWillUnmount() {
     this.props.dispatch(clearAuthRequestError());
     this.props.dispatch(clearAuthRequestSuccess());
@@ -35,12 +39,17 @@ class SignIn extends Component {
 
   render() {
     const {
+      user,
+      userToken,
       isSendingAuthRequest,
       authRequestError,
       authRequestSuccess,
       email,
       password
     } = this.props.auth;
+    if (userToken && Object.keys(user).length > 0) {
+      return <Redirect to="/auth/settings" />;
+    }
     return (
       <SignInView
         isSendingAuthRequest={isSendingAuthRequest}
@@ -100,7 +109,7 @@ const SignInView = ({
         <Error header="Sign In failed!" error={authRequestError} />
         <Message success>
           <Message.Header>Success!</Message.Header>
-          <p>Todo: Localstorage auth token</p>
+          <p>Redirecting you now.</p>
         </Message>
         <Button type="submit">Sign In</Button>
       </Form>

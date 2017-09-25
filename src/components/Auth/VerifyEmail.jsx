@@ -10,6 +10,10 @@ import {
 import { emailVerificationRequest } from "../../modules/auth/sagas.actions";
 
 class VerifyEmail extends Component {
+  componentDidMount() {
+    document.title = "Verify Email - UDIA";
+  }
+
   componentWillMount() {
     const key = this.props.match.params.key;
     this.props.dispatch(clearAuthRequestError());

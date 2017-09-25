@@ -5,6 +5,7 @@ import {
   SET_AUTH_REQUEST_SUCCESS,
   CLEAR_AUTH_REQUEST_SUCCESS,
   SET_SELF_USER_TOKEN,
+  SET_SELF_USER,
   SET_AUTH_FORM_EMAIL,
   SET_AUTH_FORM_USERNAME,
   SET_AUTH_FORM_PASSWORD,
@@ -36,6 +37,10 @@ export function clearAuthRequestSuccess() {
 
 export function setSelfUserToken(selfUserToken) {
   return { type: SET_SELF_USER_TOKEN, data: selfUserToken };
+}
+
+export function setSelfUser(selfUser) {
+  return { type: SET_SELF_USER, data: selfUser };
 }
 
 export function setAuthFormEmail(email) {

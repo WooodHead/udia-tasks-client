@@ -6,7 +6,8 @@ import {
   verifyEmail,
   changePassword,
   forgotPassword,
-  resetPassword
+  resetPassword,
+  currentUser
 } from "./api";
 import {
   isSendingAuthRequest,
@@ -15,6 +16,7 @@ import {
   setAuthRequestSuccess,
   clearAuthRequestSuccess,
   setSelfUserToken,
+  setSelfUser,
   setAuthFormEmail,
   setAuthFormUsername,
   setAuthFormPassword,
@@ -48,6 +50,7 @@ export function* loginFlow(request) {
     yield effects.put(setAuthFormPassword(""));
     yield effects.put(setAuthFormPasswordConfirmation(""));
     yield effects.put(setAuthFormOldPassword(""));
+    yield effects.call(retrieveSelfUserFlow);
   }
 }
 
@@ -55,6 +58,7 @@ export function* logoutFlow() {
   yield effects.put(clearAuthRequestError());
   yield effects.put(clearAuthRequestSuccess());
   yield effects.call(logout);
+  yield effects.put(setSelfUser({}));
   yield effects.put(setSelfUserToken(""));
 }
 
@@ -202,5 +206,18 @@ export function* resetPasswordFlow(request) {
     yield effects.put(setAuthFormPassword(""));
     yield effects.put(setAuthFormPasswordConfirmation(""));
     yield effects.put(setAuthFormOldPassword(""));
+  }
+}
+
+/**
+ * Attempt to get the current user data, otherwise clear everything and logout
+ * @param {object} request - Saga Action {type: "RETRIEVE_SELF_USER_REQUEST"}
+ */
+export function* retrieveSelfUserFlow(request) {
+  try {
+    const wasSuccessful = yield effects.call(currentUser, {});    
+    yield effects.put(setSelfUser(wasSuccessful.results[0]));
+  } catch (exception) {
+    yield effects.call(logoutFlow);    
   }
 }

@@ -1,10 +1,10 @@
-import { localStorage, post } from "../baseApi";
+import { localStorage, get, post } from "../baseApi";
 
 /**
  * Set the user's auth token, and return the value
  * @param {string} newToken - new user token string
  */
-export function me(newToken) {
+export function localToken(newToken) {
   if (typeof newToken === "string") {
     // if empty string, assume intent is to delete the token
     if (newToken) {
@@ -100,4 +100,12 @@ export function resetPassword(uid, token, new_password1, new_password2) {
     new_password1,
     new_password2
   }).then(resp => Promise.resolve(resp));
+}
+
+/**
+ * Function wrapping GET request for getting a user
+ * @param {object} params - GET request url params (eg. {"page":2})
+ */
+export function currentUser(params) {
+  return get("/users/", params).then(resp => Promise.resolve(resp));
 }
