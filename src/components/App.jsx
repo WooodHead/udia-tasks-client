@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
+import ReactGA from "react-ga";
 
 import ForgotPassword from "./Auth/ForgotPassword";
 import ResetPassword from "./Auth/ResetPassword";
@@ -13,6 +14,12 @@ import Home from "./Static/Home";
 import NoMatch from "./Static/NoMatch";
 import Navbar from "./Navbar";
 
+const LogPageView = () => {
+  ReactGA.set({ page: window.location.pathname });
+  ReactGA.pageview(window.location.pathname);
+  return null;
+};
+
 class App extends Component {
   render() {
     const siteContentStyle = {
@@ -22,6 +29,7 @@ class App extends Component {
     };
     return (
       <div style={siteContentStyle}>
+        <LogPageView />
         <Navbar />
         <div style={{ flex: "1" }}>
           <Switch>
@@ -29,9 +37,21 @@ class App extends Component {
             <Route exact path="/about" component={About} />
             <Route exact path="/auth/signin" component={SignIn} />
             <Route exact path="/auth/signup" component={SignUp} />
-            <Route exact path="/auth/forgot-password" component={ForgotPassword} />
-            <Route exact path="/auth/reset-password/:uid/:token" component={ResetPassword} />
-            <Route exact path="/auth/verify-email/:key" component={VerifyEmail} />
+            <Route
+              exact
+              path="/auth/forgot-password"
+              component={ForgotPassword}
+            />
+            <Route
+              exact
+              path="/auth/reset-password/:uid/:token"
+              component={ResetPassword}
+            />
+            <Route
+              exact
+              path="/auth/verify-email/:key"
+              component={VerifyEmail}
+            />
             <Route exact path="/auth/settings" component={Settings} />
             <Route component={NoMatch} />
           </Switch>

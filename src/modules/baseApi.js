@@ -51,6 +51,7 @@ export function patch(url, data) {
     .catch(error => Promise.reject(error));
 }
 
+// delete is reserved in javascript
 export function del(url) {
   return apiInstance
     .delete(url, { headers: headers() })

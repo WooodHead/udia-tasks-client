@@ -215,9 +215,9 @@ export function* resetPasswordFlow(request) {
  */
 export function* retrieveSelfUserFlow(request) {
   try {
-    const wasSuccessful = yield effects.call(currentUser, {});    
+    const wasSuccessful = yield effects.call(currentUser, {});
     yield effects.put(setSelfUser(wasSuccessful.results[0]));
   } catch (exception) {
-    yield effects.call(logoutFlow);    
+    yield effects.call(logoutFlow);
   }
 }

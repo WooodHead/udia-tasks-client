@@ -27,7 +27,7 @@ The environment variables are embedded during the build time. For more informati
 | `REACT_APP_API_ENDPOINT`  | `"http://localhost:5000/api"` | Server API endpoint             |
 | `REACT_APP_REDUX_LOGGING` | ` `                           | Set any value for Redux logging |
 | `REACT_APP_API_TIMEOUT`   | `10000`                       | API call milliseconds timeout   |
-
+| `REACT_APP_GA_CODE`       | `UA-81872410-1`               | Google Analytics Tracking Code  |
 
 ## Production
 

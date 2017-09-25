@@ -1,3 +1,4 @@
+import ReactGA from "react-ga";
 import {
   IS_SENDING_AUTH_REQUEST,
   SET_AUTH_REQUEST_ERROR,
@@ -60,9 +61,15 @@ function authReducer(state = initialState, action) {
         userToken: localToken(action.data)
       };
     case SET_SELF_USER:
+      const selfUser = action.data;
+      if (selfUser.id) {
+        ReactGA.set({ userId: selfUser.id });        
+      } else {
+        ReactGA.set({ userId: null });
+      }
       return {
         ...state,
-        user: action.data
+        user: selfUser
       }
     case SET_AUTH_FORM_EMAIL:
       return {
