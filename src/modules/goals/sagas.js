@@ -4,7 +4,13 @@ import {
   setGoalRequestError,
   clearGoalRequestError,
   setGoalRequestSuccess,
-  clearGoalRequestSuccess
+  clearGoalRequestSuccess,
+  addGoals,
+  addGoal,
+  setGoalID,
+  setGoalName,
+  setGoalTag,
+  setGoalAdditionalInfo
 } from "./reducer.actions";
 import { createGoal, getGoal, getGoals, updateGoal, deleteGoal } from "./api";
 
@@ -17,6 +23,21 @@ function* createGoalCall(postBody) {
     yield effects.put(setGoalRequestError(exception));
   } finally {
     yield effects.put(isSendingGoalRequest(false));
+  }
+}
+
+export function* createGoalFlow(request) {
+  yield effects.put(clearGoalRequestError());
+  yield effects.put(clearGoalRequestSuccess());
+  const wasSuccessful = yield effects.call(createGoalCall, request.data);
+  if (wasSuccessful) {
+    yield effects.put(setGoalRequestSuccess(wasSuccessful));
+    yield effects.put(clearGoalRequestError());
+    yield effects.put(addGoal(wasSuccessful));
+    yield effects.put(setGoalID(0));
+    yield effects.put(setGoalName(""));
+    yield effects.put(setGoalTag(""));
+    yield effects.put(setGoalAdditionalInfo({}));
   }
 }
 
@@ -44,7 +65,7 @@ function* getGoalsCall(payload) {
   }
 }
 
-function* updateGoal(payload) {
+function* updateGoalCall(payload) {
   yield effects.put(isSendingGoalRequest(true));
   const { id, user, name, tag, additional_info } = payload;
   try {
@@ -56,7 +77,7 @@ function* updateGoal(payload) {
   }
 }
 
-function* deleteGoal(payload) {
+function* deleteGoalCall(payload) {
   yield effects.put(isSendingGoalRequest(true));
   const { id } = payload;
   try {

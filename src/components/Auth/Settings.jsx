@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { Button, Container, Divider, Form, Header, Message } from "semantic-ui-react";
+import { Container, Form, Header, Message } from "semantic-ui-react";
 
 import {
   clearAuthRequestError,
@@ -10,11 +10,11 @@ import {
   setAuthFormPasswordConfirmation,
   setAuthFormOldPassword
 } from "../../modules/auth/reducer.actions";
-import { changePasswordRequest, logoutRequest } from "../../modules/auth/sagas.actions";
+import { changePasswordRequest } from "../../modules/auth/sagas.actions";
 import Error from "../Shared/Error";
 
 class Settings extends Component {
-  componentDidMount() {
+  componentWillMount() {
     document.title = "Account Settings - UDIA";
   }
   
@@ -48,10 +48,6 @@ class Settings extends Component {
     );
   };
 
-  logout = () => {
-    this.props.dispatch(logoutRequest())
-  }
-
   render() {
     const {
       userToken,
@@ -79,7 +75,6 @@ class Settings extends Component {
         changePasswordConfirmation={this.changePasswordConfirmation}
         changeOldPassword={this.changeOldPassword}
         onSubmitChangePassword={this.onSubmitChangePassword}
-        logout={this.logout}
       />
     );
   }
@@ -149,10 +144,6 @@ const SettingsView = ({
       </Message>
       <Form.Button type="submit">Change Password</Form.Button>
     </Form>
-    <Divider />
-    <Header>Sign Out</Header>
-    <p>You don't have to log out, but here's where you can!</p>
-    <Button onClick={logout}>See you later!</Button>
   </Container>
 );
 

@@ -6,8 +6,10 @@ import ForgotPassword from "./Auth/ForgotPassword";
 import ResetPassword from "./Auth/ResetPassword";
 import Settings from "./Auth/Settings";
 import SignIn from "./Auth/SignIn";
+import SignOut from "./Auth/SignOut";
 import SignUp from "./Auth/SignUp";
 import VerifyEmail from "./Auth/VerifyEmail";
+import CreateGoal from "./Goals/CreateGoal";
 import About from "./Static/About";
 import Footer from "./Static/Footer";
 import Home from "./Static/Home";
@@ -35,6 +37,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/about" component={About} />
+            <Route exact path="/auth/signout" component={SignOut} />
             <Route exact path="/auth/signin" component={SignIn} />
             <Route exact path="/auth/signup" component={SignUp} />
             <Route
@@ -53,6 +56,7 @@ class App extends Component {
               component={VerifyEmail}
             />
             <Route exact path="/auth/settings" component={Settings} />
+            <Route exact path="/goals/create" component={CreateGoal} />
             <Route component={NoMatch} />
           </Switch>
         </div>

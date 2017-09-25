@@ -11,7 +11,7 @@ import { forgotPasswordRequest } from "../../modules/auth/sagas.actions";
 import Error from "../Shared/Error";
 
 class ForgotPassword extends Component {
-  componentDidMount() {
+  componentWillMount() {
     document.title = "Forgot Password - UDIA";
   }
 

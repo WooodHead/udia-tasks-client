@@ -19,6 +19,8 @@ import {
   resetPasswordFlow,
   retrieveSelfUserFlow
 } from "./auth/sagas";
+import { CREATE_GOAL_REQUEST } from "./goals/constants";
+import { createGoalFlow } from "./goals/sagas";
 
 export default function* rootSaga() {
   // Authentication related sagas
@@ -30,4 +32,6 @@ export default function* rootSaga() {
   yield effects.takeLatest(FORGOT_PASSWORD_REQUEST, forgotPasswordFlow);
   yield effects.takeLatest(RESET_PASSWORD_REQUEST, resetPasswordFlow);
   yield effects.takeLatest(RETRIEVE_SELF_USER_REQUEST, retrieveSelfUserFlow);
+  // Goals related sagas
+  yield effects.takeLatest(CREATE_GOAL_REQUEST, createGoalFlow);
 }

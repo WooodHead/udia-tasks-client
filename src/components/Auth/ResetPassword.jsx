@@ -13,11 +13,8 @@ import { resetPasswordRequest } from "../../modules/auth/sagas.actions";
 import Error from "../Shared/Error";
 
 class ResetPassword extends Component {
-  componentDidMount() {
-    document.title = "Reset Password - UDIA";
-  }
-
   componentWillMount() {
+    document.title = "Reset Password - UDIA";
     this.props.dispatch(clearAuthRequestError());
     this.props.dispatch(clearAuthRequestSuccess());
   }

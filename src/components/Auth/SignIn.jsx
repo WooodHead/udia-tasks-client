@@ -13,7 +13,7 @@ import { loginRequest } from "../../modules/auth/sagas.actions";
 import Error from "../Shared/Error";
 
 class SignIn extends Component {
-  componentDidMount() {
+  componentWillMount() {
     document.title = "Sign In - UDIA";
   }
 

@@ -32,10 +32,24 @@ const NavbarView = ({ userToken, user }) => (
     </Menu.Item>
     {userToken &&
       <Menu.Menu position="right">
+        <Dropdown item text="Create">
+          <Dropdown.Menu>
+            <Dropdown.Item as={Link} to="/goals/create">
+              Goal
+            </Dropdown.Item>
+            <Dropdown.Item as={Link} to="/tasks/create">
+              Task
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
         <Dropdown item text={user.username || "..."}>
           <Dropdown.Menu>
             <Dropdown.Item as={Link} to="/auth/settings">
               Settings
+            </Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item as={Link} to="/auth/signout">
+              Sign Out
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>

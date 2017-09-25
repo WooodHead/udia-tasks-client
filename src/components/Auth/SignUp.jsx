@@ -15,7 +15,7 @@ import { registerRequest } from "../../modules/auth/sagas.actions";
 import Error from "../Shared/Error";
 
 class SignUp extends Component {
-  componentDidMount() {
+  componentWillMount() {
     document.title = "Sign Up - UDIA";
   }
 
