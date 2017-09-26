@@ -23,6 +23,7 @@ import {
   setAuthFormPasswordConfirmation,
   setAuthFormOldPassword
 } from "./reducer.actions";
+import { addAppMessage } from "../messages/reducer.actions";
 
 function* loginCall(postBody) {
   yield effects.put(isSendingAuthRequest(true));
@@ -51,13 +52,23 @@ export function* loginFlow(request) {
     yield effects.put(setAuthFormPasswordConfirmation(""));
     yield effects.put(setAuthFormOldPassword(""));
     yield effects.call(retrieveSelfUserFlow);
+    yield effects.put(
+      addAppMessage({
+        context: "success",
+        header: "Sign In",
+        content: "Successfully signed in!"
+      })
+    );
   }
 }
 
 export function* logoutFlow() {
   yield effects.put(clearAuthRequestError());
   yield effects.put(clearAuthRequestSuccess());
-  yield effects.call(logout);
+  try {
+    // logout may fail, but it should not throw client err
+    yield effects.call(logout);
+  } catch (exception) {}
   yield effects.put(setSelfUser({}));
   yield effects.put(setSelfUserToken(""));
 }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import ReactGA from "react-ga";
 
+import AppMessages from "./AppMessages/AppMessages";
 import ForgotPassword from "./Auth/ForgotPassword";
 import ResetPassword from "./Auth/ResetPassword";
 import Settings from "./Auth/Settings";
@@ -36,6 +37,7 @@ class App extends Component {
         <LogPageView />
         <Navbar />
         <div style={{ flex: "1" }}>
+          <AppMessages />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/about" component={About} />
