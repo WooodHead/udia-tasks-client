@@ -8,6 +8,7 @@ import {
   SET_GOALS,
   ADD_GOALS,
   ADD_GOAL,
+  REMOVE_GOAL,
   SET_GOAL_ID,
   SET_GOAL_USER_ID,
   SET_GOAL_NAME,
@@ -51,6 +52,10 @@ export function addGoals(response) {
 
 export function addGoal(response) {
   return { type: ADD_GOAL, data: response };
+}
+
+export function removeGoal(id) {
+  return { type: REMOVE_GOAL, data: id };
 }
 
 export function setGoalID(id) {

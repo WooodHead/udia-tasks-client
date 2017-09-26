@@ -9,6 +9,7 @@ import {
   addGoals,
   addGoal,
   setGoals,
+  removeGoal,
   setGoalID,
   setGoalName,
   setGoalTag,
@@ -137,11 +138,24 @@ function* deleteGoalCall(payload) {
   yield effects.put(isSendingGoalRequest(true));
   const { id } = payload;
   try {
-    return yield effects.call(deleteGoal, id);
+    yield effects.call(deleteGoal, id);
+    return true;
   } catch (exception) {
     yield effects.put(setGoalRequestError(exception));
     return false;
   } finally {
     yield effects.put(isSendingGoalRequest(false));
+  }
+}
+
+export function* deleteGoalFlow(request) {
+  yield effects.put(clearGoalRequestError());
+  yield effects.put(clearGoalRequestSuccess());
+  const { id } = request.data;
+  const wasSuccessful = yield effects.call(deleteGoalCall, request.data);
+  if (wasSuccessful) {
+    yield effects.put(removeGoal(id));
+    yield effects.put(setGoalRequestSuccess(wasSuccessful));
+    yield effects.put(clearGoalRequestError());
   }
 }

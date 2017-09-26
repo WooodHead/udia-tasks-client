@@ -23,16 +23,18 @@ import {
   CREATE_GOAL_REQUEST,
   GET_GOALS_REQUEST,
   GET_GOAL_REQUEST,
-  UPDATE_GOAL_REQUEST
+  UPDATE_GOAL_REQUEST,
+  DELETE_GOAL_REQUEST
 } from "./goals/constants";
 import {
   createGoalFlow,
   getGoalsFlow,
   getGoalFlow,
-  updateGoalFlow
+  updateGoalFlow,
+  deleteGoalFlow
 } from "./goals/sagas";
-import { CREATE_TASK_REQUEST } from "./tasks/constants";
-import { createTaskFlow } from "./tasks/sagas";
+import { CREATE_TASK_REQUEST, GET_TASKS_REQUEST } from "./tasks/constants";
+import { createTaskFlow, getTasksFlow } from "./tasks/sagas";
 
 export default function* rootSaga() {
   // Authentication related sagas
@@ -49,6 +51,8 @@ export default function* rootSaga() {
   yield effects.takeLatest(GET_GOALS_REQUEST, getGoalsFlow);
   yield effects.takeLatest(GET_GOAL_REQUEST, getGoalFlow);
   yield effects.takeLatest(UPDATE_GOAL_REQUEST, updateGoalFlow);
+  yield effects.takeLatest(DELETE_GOAL_REQUEST, deleteGoalFlow);
   // Tasks related sagas
   yield effects.takeLatest(CREATE_TASK_REQUEST, createTaskFlow);
+  yield effects.takeLatest(GET_TASKS_REQUEST, getTasksFlow);
 }

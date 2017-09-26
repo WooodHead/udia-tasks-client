@@ -8,6 +8,7 @@ export const CLEAR_GOALS_PAGINATION = "CLEAR_GOALS_PAGINATION";
 export const SET_GOALS = "SET_GOALS";
 export const ADD_GOALS = "ADD_GOALS";
 export const ADD_GOAL = "ADD_GOAL";
+export const REMOVE_GOAL = "REMOVE_GOAL";
 export const SET_GOAL_ID = "SET_GOAL_ID";
 export const SET_GOAL_USER_ID = "SET_GOAL_USER_ID";
 export const SET_GOAL_NAME = "SET_GOAL_NAME";

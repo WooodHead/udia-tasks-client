@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Message, Rail } from "semantic-ui-react";
+import { Rail } from "semantic-ui-react";
 
 import { deleteAppMessage } from "../../modules/messages/reducer.actions";
+import AppMessage from "./AppMessage";
 
 class AppMessages extends Component {
   dismissMessage = index => {
@@ -32,7 +33,7 @@ const AppMessagesView = ({ messages, dismissMessage }) => {
       <Rail internal={true} attached={true} position="right">
         {messages.map((message, index) => {
           return (
-            <Message
+            <AppMessage
               key={index}
               header={message.header}
               content={message.content}

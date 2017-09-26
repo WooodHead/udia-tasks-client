@@ -8,6 +8,7 @@ import {
   SET_GOALS,
   ADD_GOALS,
   ADD_GOAL,
+  REMOVE_GOAL,
   SET_GOAL_ID,
   SET_GOAL_USER_ID,
   SET_GOAL_NAME,
@@ -110,6 +111,13 @@ function goalsReducer(state = initialState, action) {
       if (!setGoalsOrdering.has(goal.id)) {
         goalsOrdering.unshift(goal.id);
       }
+      return { ...state, goals, goalsOrdering };
+    case REMOVE_GOAL:
+      let id = action.data;
+      goals = { ...state.goals };
+      goalsOrdering = [...state.goalsOrdering];
+      delete goals[id];
+      goalsOrdering.splice(goalsOrdering.indexOf(id), 1);
       return { ...state, goals, goalsOrdering };
     case SET_GOAL_ID:
       return {

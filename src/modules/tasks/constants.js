@@ -8,6 +8,7 @@ export const CLEAR_TASKS_PAGINATION = "CLEAR_TASKS_PAGINATION";
 export const SET_TASKS = "SET_TASKS";
 export const ADD_TASKS = "ADD_TASKS";
 export const ADD_TASK = "ADD_TASK";
+export const REMOVE_TASK = "REMOVE_TASK";
 export const SET_TASK_ID = "SET_TASK_ID";
 export const SET_TASK_USER_ID = "SET_TASK_USER_ID";
 export const SET_TASK_NAME = "SET_TASK_NAME";

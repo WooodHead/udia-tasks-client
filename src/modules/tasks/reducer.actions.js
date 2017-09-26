@@ -8,6 +8,7 @@ import {
   SET_TASKS,
   ADD_TASKS,
   ADD_TASK,
+  REMOVE_TASK,
   SET_TASK_ID,
   SET_TASK_USER_ID,
   SET_TASK_NAME,
@@ -55,6 +56,10 @@ export function addTasks(response) {
 
 export function addTask(response) {
   return { type: ADD_TASK, data: response };
+}
+
+export function removeTask(id) {
+  return { type: REMOVE_TASK, data: id };
 }
 
 export function setTaskID(id) {
