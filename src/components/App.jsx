@@ -12,11 +12,13 @@ import SignUp from "./Auth/SignUp";
 import VerifyEmail from "./Auth/VerifyEmail";
 import Board from "./Board/Board";
 import CreateGoal from "./Goals/CreateGoal";
+import ViewGoal from "./Goals/ViewGoal";
 import About from "./Static/About";
 import Footer from "./Static/Footer";
 import Home from "./Static/Home";
 import NoMatch from "./Static/NoMatch";
 import CreateTask from "./Tasks/CreateTask";
+import ViewTask from "./Tasks/ViewTask";
 import Navbar from "./Navbar";
 
 const LogPageView = () => {
@@ -61,7 +63,9 @@ class App extends Component {
             />
             <Route exact path="/auth/settings" component={Settings} />
             <Route exact path="/board" component={Board} />
+            <Route exact path="/goals/:id" component={ViewGoal} />
             <Route exact path="/goals/create" component={CreateGoal} />
+            <Route exact path="/tasks/:id" component={ViewTask} />
             <Route exact path="/tasks/create" component={CreateTask} />
             <Route component={NoMatch} />
           </Switch>

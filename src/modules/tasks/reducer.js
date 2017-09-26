@@ -8,6 +8,7 @@ import {
   SET_TASKS,
   ADD_TASKS,
   ADD_TASK,
+  REMOVE_TASK,
   SET_TASK_ID,
   SET_TASK_USER_ID,
   SET_TASK_NAME,
@@ -45,6 +46,7 @@ function tasksReducer(state = initialState, action) {
   let tasksPagination = { count, next, previous };
   let tasks = {};
   let tasksOrdering = [];
+  let setTasksOrdering = new Set([]);
   let task = {};
 
   switch (action.type) {
@@ -99,9 +101,13 @@ function tasksReducer(state = initialState, action) {
       tasksPagination = { count, next, previous };
       tasks = { ...state.tasks };
       tasksOrdering = [...state.tasksOrdering];
+      setTasksOrdering = new Set(tasksOrdering);
       for (let task of results) {
         tasks[task.id] = task;
-        tasksOrdering.push(task.id);
+        if (!setTasksOrdering.has(task.id)) {
+          tasksOrdering.push(task.id);
+        }
+        setTasksOrdering.add(task.id);
       }
       return { ...state, tasks, tasksOrdering, tasksPagination };
     case ADD_TASK:
@@ -109,7 +115,17 @@ function tasksReducer(state = initialState, action) {
       tasks = { ...state.tasks };
       tasksOrdering = [...state.tasksOrdering];
       tasks[task.id] = task;
-      tasksOrdering.unshift(task.id);
+      setTasksOrdering = new Set(tasksOrdering);
+      if (!setTasksOrdering.has(task.id)) {
+        tasksOrdering.unshift(task.id);
+      }
+      return { ...state, tasks, tasksOrdering };
+    case REMOVE_TASK:
+      let id = action.data;
+      tasks = { ...state.tasks };
+      tasksOrdering = [...state.tasksOrdering];
+      delete tasks[id];
+      tasksOrdering.splice(tasksOrdering.indexOf(id), 1);
       return { ...state, tasks, tasksOrdering };
     case SET_TASK_ID:
       return {

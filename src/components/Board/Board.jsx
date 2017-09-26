@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { Card, Grid, Header, Label } from "semantic-ui-react";
 
 import {
@@ -44,7 +45,7 @@ const BoardView = ({ tasks, tasksOrdering }) => (
             <Card key={index}>
               <Card.Content>
                 <Card.Header>
-                  {task.name}
+                  <Link to={`/tasks/${task.id}`}>{task.name}</Link>
                 </Card.Header>
                 <Card.Meta>
                   {"Time: "}{task.time_difficulty}<br />
@@ -52,11 +53,16 @@ const BoardView = ({ tasks, tasksOrdering }) => (
                   {"Focus: "}{task.focus_difficulty}
                 </Card.Meta>
               </Card.Content>
-              <Card.Content extra>
-                {task.goals.map((goal, index) => {
-                  return <Label key={index}>{goal.tag}</Label>;
-                })}
-              </Card.Content>
+              {task.goals && task.goals.length > 0 &&
+                <Card.Content extra>
+                  {task.goals.map((goal, index) => {
+                    return (
+                      <Label key={index} as={Link} to={`/goals/${goal.id}`}>
+                        {goal.tag}
+                      </Label>
+                    );
+                  })}
+                </Card.Content>}
             </Card>
           );
         })}
