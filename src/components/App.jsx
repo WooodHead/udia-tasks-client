@@ -63,10 +63,10 @@ class App extends Component {
             />
             <Route exact path="/auth/settings" component={Settings} />
             <Route exact path="/board" component={Board} />
-            <Route exact path="/goals/:id" component={ViewGoal} />
             <Route exact path="/goals/create" component={CreateGoal} />
-            <Route exact path="/tasks/:id" component={ViewTask} />
+            <Route exact path="/goals/:id" component={ViewGoal} />
             <Route exact path="/tasks/create" component={CreateTask} />
+            <Route exact path="/tasks/:id" component={ViewTask} />
             <Route component={NoMatch} />
           </Switch>
         </div>
