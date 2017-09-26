@@ -9,7 +9,7 @@ const Home = () => {
       <Segment size="massive" textAlign="center" padded basic>
         <Header as="h1" icon>
           <Logo maxHeight="90px" />
-          UDIA
+          <div>UDIA</div>
           <Header.Subheader>
             Universal Dream, Infinite Awareness
           </Header.Subheader>

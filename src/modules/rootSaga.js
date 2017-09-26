@@ -19,8 +19,10 @@ import {
   resetPasswordFlow,
   retrieveSelfUserFlow
 } from "./auth/sagas";
-import { CREATE_GOAL_REQUEST } from "./goals/constants";
-import { createGoalFlow } from "./goals/sagas";
+import { CREATE_GOAL_REQUEST, GET_GOALS_REQUEST } from "./goals/constants";
+import { createGoalFlow, getGoalsFlow } from "./goals/sagas";
+import { CREATE_TASK_REQUEST } from "./tasks/constants";
+import { createTaskFlow } from "./tasks/sagas";
 
 export default function* rootSaga() {
   // Authentication related sagas
@@ -34,4 +36,7 @@ export default function* rootSaga() {
   yield effects.takeLatest(RETRIEVE_SELF_USER_REQUEST, retrieveSelfUserFlow);
   // Goals related sagas
   yield effects.takeLatest(CREATE_GOAL_REQUEST, createGoalFlow);
+  yield effects.takeLatest(GET_GOALS_REQUEST, getGoalsFlow);
+  // Tasks related sagas
+  yield effects.takeLatest(CREATE_TASK_REQUEST, createTaskFlow);
 }

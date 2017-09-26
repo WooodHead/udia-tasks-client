@@ -14,6 +14,7 @@ import About from "./Static/About";
 import Footer from "./Static/Footer";
 import Home from "./Static/Home";
 import NoMatch from "./Static/NoMatch";
+import CreateTask from "./Tasks/CreateTask";
 import Navbar from "./Navbar";
 
 const LogPageView = () => {
@@ -57,6 +58,7 @@ class App extends Component {
             />
             <Route exact path="/auth/settings" component={Settings} />
             <Route exact path="/goals/create" component={CreateGoal} />
+            <Route exact path="/tasks/create" component={CreateTask} />
             <Route component={NoMatch} />
           </Switch>
         </div>

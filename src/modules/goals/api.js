@@ -10,7 +10,7 @@ export function getGoals(params) {
 
 /**
  * Function wrapping GET request for getting a single goal
- * @param {string} id - ID of goal to get
+ * @param {number} id - ID of goal to get
  * @param {object} params - GET request url parameters
  */
 export function getGoal(id, params) {
@@ -19,7 +19,7 @@ export function getGoal(id, params) {
 
 /**
  * Function wrapping POST request for creating a goal
- * @param {object} user - User object
+ * @param {number} user - User ID
  * @param {string} name - Name of the goal to set
  * @param {string} tag - Shorthand reference to the goal
  * @param {object} additional_info - JSON object containing additional info
@@ -32,7 +32,7 @@ export function createGoal(user, name, tag, additional_info) {
 
 /**
  * Function wrapping PUT request for updating a goal
- * @param {string} id - ID of goal to update
+ * @param {number} id - ID of goal to update
  * @param {object} user - User object
  * @param {string} name - Updated goal name
  * @param {string} tag - Update goal tag shorthand
@@ -46,7 +46,7 @@ export function updateGoal(id, user, name, tag, additional_info) {
 
 /**
  * Function wrapping DELETE request for deleting a goal
- * @param {string} id - ID of goal to delete
+ * @param {number} id - ID of goal to delete
  */
 export function deleteGoal(id) {
   return del(`/goals/${id}/`).then(resp => Promise.resolve(resp));

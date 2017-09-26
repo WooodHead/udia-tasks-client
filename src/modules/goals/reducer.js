@@ -82,12 +82,7 @@ function goalsReducer(state = initialState, action) {
         goals[goal.id] = goal;
         goalsOrdering.push(goal.id);
       }
-      return {
-        ...state,
-        goals,
-        goalsOrdering,
-        goalsPagination
-      };
+      return { ...state, goals, goalsOrdering, goalsPagination };
     case ADD_GOALS:
       count = action.data.count;
       next = action.data.next;
@@ -100,23 +95,14 @@ function goalsReducer(state = initialState, action) {
         goals[goal.id] = goal;
         goalsOrdering.push(goal.id);
       }
-      return {
-        ...state,
-        goals,
-        goalsOrdering,
-        goalsPagination
-      };
+      return { ...state, goals, goalsOrdering, goalsPagination };
     case ADD_GOAL:
       goal = action.data;
       goals = { ...state.goals };
       goalsOrdering = [...state.goalsOrdering];
       goals[goal.id] = goal;
-      goalsOrdering.unshift(goal);
-      return {
-        ...state,
-        goals,
-        goalsOrdering
-      };
+      goalsOrdering.unshift(goal.id);
+      return { ...state, goals, goalsOrdering };
     case SET_GOAL_ID:
       return {
         ...state,

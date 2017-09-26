@@ -22,7 +22,7 @@ const SignOutView = () => (
     <Grid.Column>
       <Header>Sign Out</Header>
       <Message>
-        <Logo maxHeight="100px" />
+        <div style={{ textAlign: "center" }}><Logo maxHeight="100px" /></div>
         <p>You successfully signed out. See you later!</p>
       </Message>
     </Grid.Column>
