@@ -37,6 +37,7 @@ function goalsReducer(state = initialState, action) {
   let goalsPagination = { count, next, previous };
   let goals = {};
   let goalsOrdering = [];
+  let setGoalsOrdering = new Set([]);
   let goal = {};
 
   switch (action.type) {
@@ -91,9 +92,13 @@ function goalsReducer(state = initialState, action) {
       goalsPagination = { count, next, previous };
       goals = { ...state.goals };
       goalsOrdering = [...state.goalsOrdering];
+      setGoalsOrdering = new Set(goalsOrdering);
       for (let goal of results) {
         goals[goal.id] = goal;
-        goalsOrdering.push(goal.id);
+        if (!setGoalsOrdering.has(goal.id)) {
+          goalsOrdering.push(goal.id);
+        }
+        setGoalsOrdering.add(goal.id);
       }
       return { ...state, goals, goalsOrdering, goalsPagination };
     case ADD_GOAL:
@@ -101,7 +106,10 @@ function goalsReducer(state = initialState, action) {
       goals = { ...state.goals };
       goalsOrdering = [...state.goalsOrdering];
       goals[goal.id] = goal;
-      goalsOrdering.unshift(goal.id);
+      setGoalsOrdering = new Set(goalsOrdering);
+      if (!setGoalsOrdering.has(goal.id)) {
+        goalsOrdering.unshift(goal.id);
+      }
       return { ...state, goals, goalsOrdering };
     case SET_GOAL_ID:
       return {

@@ -58,6 +58,17 @@ function* getGoalCall(payload) {
   }
 }
 
+export function* getGoalFlow(request) {
+  yield effects.put(clearGoalRequestError());
+  yield effects.put(clearGoalRequestSuccess());
+  const wasSuccessful = yield effects.call(getGoalCall, request.data);
+  if (wasSuccessful) {
+    yield effects.put(addGoal(wasSuccessful));
+    yield effects.put(setGoalRequestSuccess(wasSuccessful));
+    yield effects.put(clearGoalRequestError());
+  }
+}
+
 function* getGoalsCall(payload) {
   yield effects.put(isSendingGoalRequest(true));
   const { params } = payload;
@@ -105,8 +116,20 @@ function* updateGoalCall(payload) {
     return yield effects.call(updateGoal, id, user, name, tag, additional_info);
   } catch (exception) {
     yield effects.put(setGoalRequestError(exception));
+    return false;
   } finally {
     yield effects.put(isSendingGoalRequest(false));
+  }
+}
+
+export function* updateGoalFlow(request) {
+  yield effects.put(clearGoalRequestError());
+  yield effects.put(clearGoalRequestSuccess());
+  const wasSuccessful = yield effects.call(updateGoalCall, request.data);
+  if (wasSuccessful) {
+    yield effects.put(addGoal(wasSuccessful));
+    yield effects.put(setGoalRequestSuccess(wasSuccessful));
+    yield effects.put(clearGoalRequestError());
   }
 }
 

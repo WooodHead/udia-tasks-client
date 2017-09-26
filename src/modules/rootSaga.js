@@ -19,8 +19,18 @@ import {
   resetPasswordFlow,
   retrieveSelfUserFlow
 } from "./auth/sagas";
-import { CREATE_GOAL_REQUEST, GET_GOALS_REQUEST } from "./goals/constants";
-import { createGoalFlow, getGoalsFlow } from "./goals/sagas";
+import {
+  CREATE_GOAL_REQUEST,
+  GET_GOALS_REQUEST,
+  GET_GOAL_REQUEST,
+  UPDATE_GOAL_REQUEST
+} from "./goals/constants";
+import {
+  createGoalFlow,
+  getGoalsFlow,
+  getGoalFlow,
+  updateGoalFlow
+} from "./goals/sagas";
 import { CREATE_TASK_REQUEST } from "./tasks/constants";
 import { createTaskFlow } from "./tasks/sagas";
 
@@ -37,6 +47,8 @@ export default function* rootSaga() {
   // Goals related sagas
   yield effects.takeLatest(CREATE_GOAL_REQUEST, createGoalFlow);
   yield effects.takeLatest(GET_GOALS_REQUEST, getGoalsFlow);
+  yield effects.takeLatest(GET_GOAL_REQUEST, getGoalFlow);
+  yield effects.takeLatest(UPDATE_GOAL_REQUEST, updateGoalFlow);
   // Tasks related sagas
   yield effects.takeLatest(CREATE_TASK_REQUEST, createTaskFlow);
 }

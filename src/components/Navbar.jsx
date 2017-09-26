@@ -27,9 +27,18 @@ const NavbarView = ({ userToken, user }) => (
     <Menu.Item as={Link} to="/">
       UDIA
     </Menu.Item>
-    <Menu.Item as={Link} to="/about">
-      About
-    </Menu.Item>
+    {!userToken &&
+      <Menu.Menu position="left">
+        <Menu.Item as={Link} to="/about">
+          About
+        </Menu.Item>
+      </Menu.Menu>}
+    {userToken &&
+      <Menu.Menu position="left">
+        <Menu.Item as={Link} to="/board">
+          Board
+        </Menu.Item>
+      </Menu.Menu>}
     {userToken &&
       <Menu.Menu position="right">
         <Dropdown item text="Create">

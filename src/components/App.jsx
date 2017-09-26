@@ -9,6 +9,7 @@ import SignIn from "./Auth/SignIn";
 import SignOut from "./Auth/SignOut";
 import SignUp from "./Auth/SignUp";
 import VerifyEmail from "./Auth/VerifyEmail";
+import Board from "./Board/Board";
 import CreateGoal from "./Goals/CreateGoal";
 import About from "./Static/About";
 import Footer from "./Static/Footer";
@@ -57,6 +58,7 @@ class App extends Component {
               component={VerifyEmail}
             />
             <Route exact path="/auth/settings" component={Settings} />
+            <Route exact path="/board" component={Board} />
             <Route exact path="/goals/create" component={CreateGoal} />
             <Route exact path="/tasks/create" component={CreateTask} />
             <Route component={NoMatch} />
