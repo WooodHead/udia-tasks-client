@@ -58,6 +58,7 @@ const ViewTaskView = ({ task }) => (
             </Label>
           );
         })}
+      <p><Link to={`/tasks/${task.id}/edit`}>Edit Task</Link></p>
       <Dimmer active={!task.name} inverted>
         <Loader>Loading</Loader>
       </Dimmer>

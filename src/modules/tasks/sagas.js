@@ -10,6 +10,7 @@ import {
   addTasks,
   addTask,
   removeTask,
+  setTaskID,
   setTaskName,
   setTaskTimeDifficulty,
   setTaskEnergyDifficulty,
@@ -118,7 +119,7 @@ function* getTaskCall(payload) {
     yield effects.put(setTaskRequestError(exception));
     return false;
   } finally {
-    yield effects.put(isSendingTaskRequest(true));
+    yield effects.put(isSendingTaskRequest(false));
   }
 }
 
@@ -130,6 +131,26 @@ export function* getTaskFlow(request) {
     yield effects.put(addTask(wasSuccessful));
     yield effects.put(setTaskRequestSuccess(wasSuccessful));
     yield effects.put(clearTaskRequestError());
+  }
+}
+
+export function* getEditableTaskFlow(request) {
+  yield effects.put(clearTaskRequestError());
+  yield effects.put(clearTaskRequestSuccess());
+  const wasSuccessful = yield effects.call(getTaskCall, request.data);
+  if (wasSuccessful) {
+    yield effects.put(clearTaskRequestError());
+    yield effects.put(addTask(wasSuccessful));
+    // do not set request success for editing tasks, simply populate the fields
+    yield effects.put(setTaskName(wasSuccessful.name));
+    yield effects.put(setTaskTimeDifficulty(wasSuccessful.time_difficulty));
+    yield effects.put(setTaskEnergyDifficulty(wasSuccessful.energy_difficulty));
+    yield effects.put(setTaskFocusDifficulty(wasSuccessful.focus_difficulty));
+    yield effects.put(
+      setTaskGoalIDs(wasSuccessful.goal_ids.map(val => `${val}`))
+    );
+    yield effects.put(setTaskAdditionalInfo(wasSuccessful.additional_info));
+    yield effects.put(setTaskID(wasSuccessful.id));
   }
 }
 

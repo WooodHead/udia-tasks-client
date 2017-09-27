@@ -2,6 +2,7 @@ import {
   CREATE_TASK_REQUEST,
   GET_TASKS_REQUEST,
   GET_TASK_REQUEST,
+  GET_EDITABLE_TASK_REQUEST,
   UPDATE_TASK_REQUEST,
   DELETE_TASK_REQUEST
 } from "./constants";
@@ -16,6 +17,10 @@ export function getTaskRequest(payload) {
 
 export function getTasksRequest(payload) {
   return { type: GET_TASKS_REQUEST, data: payload };
+}
+
+export function getEditableTaskRequest(payload) {
+  return { type: GET_EDITABLE_TASK_REQUEST, data: payload };
 }
 
 export function updateTaskRequest(payload) {

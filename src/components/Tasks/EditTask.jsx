@@ -5,32 +5,51 @@ import { Header } from "semantic-ui-react";
 
 import TaskFormView from "./TaskFormView";
 import {
+  setTaskID,
   setTaskName,
   setTaskTimeDifficulty,
   setTaskEnergyDifficulty,
   setTaskFocusDifficulty,
   setTaskGoalIDs,
+  setTaskAdditionalInfo,
   clearTaskRequestError,
   clearTaskRequestSuccess
 } from "../../modules/tasks/reducer.actions";
-import { createTaskRequest } from "../../modules/tasks/sagas.actions";
+import {
+  getEditableTaskRequest,
+  updateTaskRequest
+} from "../../modules/tasks/sagas.actions";
 import {
   clearGoalRequestError,
   clearGoalRequestSuccess
 } from "../../modules/goals/reducer.actions";
 import { getGoalsRequest } from "../../modules/goals/sagas.actions";
 
-class CreateTask extends Component {
+class EditTask extends Component {
   componentWillMount() {
-    document.title = "Create Task - UDIA";
+    document.title = "Edit Task - UDIA";
+    const id = this.props.match.params.id;
     this.props.dispatch(getGoalsRequest({}));
+    this.props.dispatch(clearTaskRequestError());
+    this.props.dispatch(clearTaskRequestSuccess());
+    this.props.dispatch(setTaskID(id));
+    this.props.dispatch(getEditableTaskRequest({ id }));
   }
 
   componentWillUnmount() {
-    this.props.dispatch(clearGoalRequestError());
-    this.props.dispatch(clearGoalRequestSuccess());
+    this.props.dispatch(setTaskID(0));
     this.props.dispatch(clearTaskRequestError());
     this.props.dispatch(clearTaskRequestSuccess());
+    this.props.dispatch(clearGoalRequestError());
+    this.props.dispatch(clearGoalRequestSuccess());
+    // reset the task form back to defaults
+    this.props.dispatch(setTaskID(0));
+    this.props.dispatch(setTaskName(""));
+    this.props.dispatch(setTaskTimeDifficulty(1));
+    this.props.dispatch(setTaskEnergyDifficulty(2));
+    this.props.dispatch(setTaskFocusDifficulty(3));
+    this.props.dispatch(setTaskGoalIDs([]));
+    this.props.dispatch(setTaskAdditionalInfo({}));
   }
 
   changeTaskName = event => {
@@ -58,6 +77,7 @@ class CreateTask extends Component {
     const { dispatch, tasks, auth } = this.props;
     const { user } = auth;
     const {
+      currentTaskID,
       name,
       timeDifficulty,
       energyDifficulty,
@@ -66,7 +86,8 @@ class CreateTask extends Component {
       goalIDs
     } = tasks;
     dispatch(
-      createTaskRequest({
+      updateTaskRequest({
+        id: currentTaskID,
         user: user.id || 0,
         additional_info: additionalInfo,
         goal_ids: goalIDs,
@@ -96,6 +117,7 @@ class CreateTask extends Component {
       goalIDs
     } = tasks;
     const goalsList = this.props.goals.goals;
+    console.log(goalIDs, goalsList)
     let goalOptions = [];
     Object.entries(goalsList).forEach(([key, value]) => {
       goalOptions.push({
@@ -112,9 +134,9 @@ class CreateTask extends Component {
     }
     return (
       <TaskFormView
-        headerText={"Create Task"}
-        submitText={"Create Task"}
-        successText={"Your task has been created."}
+        headerText={"Edit Task"}
+        submitText={"Edit Task"}
+        successText={"Your task has been edited."}
         isSendingTaskRequest={isSendingTaskRequest}
         taskRequestError={taskRequestError}
         taskRequestSuccess={taskRequestSuccess}
@@ -141,4 +163,4 @@ function mapStateToProps(state) {
   return { auth: state.auth, tasks: state.tasks, goals: state.goals };
 }
 
-export default connect(mapStateToProps)(CreateTask);
+export default connect(mapStateToProps)(EditTask);

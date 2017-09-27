@@ -18,6 +18,7 @@ import Footer from "./Static/Footer";
 import Home from "./Static/Home";
 import NoMatch from "./Static/NoMatch";
 import CreateTask from "./Tasks/CreateTask";
+import EditTask from "./Tasks/EditTask";
 import ViewTask from "./Tasks/ViewTask";
 import Navbar from "./Navbar";
 
@@ -67,6 +68,7 @@ class App extends Component {
             <Route exact path="/goals/:id" component={ViewGoal} />
             <Route exact path="/tasks/create" component={CreateTask} />
             <Route exact path="/tasks/:id" component={ViewTask} />
+            <Route exact path="/tasks/:id/edit" component={EditTask} />
             <Route component={NoMatch} />
           </Switch>
         </div>
