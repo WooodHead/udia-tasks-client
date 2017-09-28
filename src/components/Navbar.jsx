@@ -35,8 +35,11 @@ const NavbarView = ({ userToken, user }) => (
       </Menu.Menu>}
     {userToken &&
       <Menu.Menu position="left">
-        <Menu.Item as={Link} to="/board">
-          Board
+        <Menu.Item as={Link} to="/tasks">
+          Tasks
+        </Menu.Item>
+        <Menu.Item as={Link} to="/goals">
+          Goals
         </Menu.Item>
       </Menu.Menu>}
     {userToken &&

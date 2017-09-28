@@ -10,16 +10,18 @@ import SignIn from "./Auth/SignIn";
 import SignOut from "./Auth/SignOut";
 import SignUp from "./Auth/SignUp";
 import VerifyEmail from "./Auth/VerifyEmail";
-import Board from "./Board/Board";
 import CreateGoal from "./Goals/CreateGoal";
+import UpdateGoal from "./Goals/UpdateGoal";
 import ViewGoal from "./Goals/ViewGoal";
+import ViewGoals from "./Goals/ViewGoals";
 import About from "./Static/About";
 import Footer from "./Static/Footer";
 import Home from "./Static/Home";
 import NoMatch from "./Static/NoMatch";
 import CreateTask from "./Tasks/CreateTask";
-import EditTask from "./Tasks/EditTask";
+import UpdateTask from "./Tasks/UpdateTask";
 import ViewTask from "./Tasks/ViewTask";
+import ViewTasks from "./Tasks/ViewTasks";
 import Navbar from "./Navbar";
 
 const LogPageView = () => {
@@ -63,12 +65,14 @@ class App extends Component {
               component={VerifyEmail}
             />
             <Route exact path="/auth/settings" component={Settings} />
-            <Route exact path="/board" component={Board} />
+            <Route exact path="/goals" component={ViewGoals} />
             <Route exact path="/goals/create" component={CreateGoal} />
             <Route exact path="/goals/:id" component={ViewGoal} />
+            <Route exact path="/goals/:id/update" component={UpdateGoal} />
+            <Route exact path="/tasks" component={ViewTasks} />
             <Route exact path="/tasks/create" component={CreateTask} />
             <Route exact path="/tasks/:id" component={ViewTask} />
-            <Route exact path="/tasks/:id/edit" component={EditTask} />
+            <Route exact path="/tasks/:id/update" component={UpdateTask} />
             <Route component={NoMatch} />
           </Switch>
         </div>

@@ -109,12 +109,16 @@ class CreateTask extends Component {
 
     if (!auth.userToken) {
       return <Redirect to="/auth/signin" />;
+    } else if (!!taskRequestSuccess) {
+      const taskID = taskRequestSuccess.id;
+      return <Redirect to={`/tasks/${taskID}`} />
     }
     return (
       <TaskFormView
         headerText={"Create Task"}
         submitText={"Create Task"}
         successText={"Your task has been created."}
+        failureText={"Create Task Failed!"}
         isSendingTaskRequest={isSendingTaskRequest}
         taskRequestError={taskRequestError}
         taskRequestSuccess={taskRequestSuccess}

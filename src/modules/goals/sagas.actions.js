@@ -2,6 +2,7 @@ import {
   CREATE_GOAL_REQUEST,
   GET_GOAL_REQUEST,
   GET_GOALS_REQUEST,
+  GET_EDITABLE_GOAL_REQUEST,
   UPDATE_GOAL_REQUEST,
   DELETE_GOAL_REQUEST
 } from "./constants";
@@ -16,6 +17,10 @@ export function getGoalRequest(payload) {
 
 export function getGoalsRequest(payload) {
   return { type: GET_GOALS_REQUEST, data: payload };
+}
+
+export function getEditableGoalRequest(payload) {
+  return { type: GET_EDITABLE_GOAL_REQUEST, data: payload };
 }
 
 export function updateGoalRequest(payload) {

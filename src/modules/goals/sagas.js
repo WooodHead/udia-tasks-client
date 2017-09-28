@@ -17,6 +17,7 @@ import {
 } from "./reducer.actions";
 import { getGoalsRequest } from "./sagas.actions";
 import { createGoal, getGoal, getGoals, updateGoal, deleteGoal } from "./api";
+import { addAppMessage } from "../messages/reducer.actions";
 
 function* createGoalCall(postBody) {
   yield effects.put(isSendingGoalRequest(true));
@@ -43,6 +44,13 @@ export function* createGoalFlow(request) {
     yield effects.put(setGoalName(""));
     yield effects.put(setGoalTag(""));
     yield effects.put(setGoalAdditionalInfo({}));
+    yield effects.put(
+      addAppMessage({
+        context: "success",
+        header: "Goal",
+        content: "Successfully created the goal!"
+      })
+    );
   }
 }
 
@@ -67,6 +75,21 @@ export function* getGoalFlow(request) {
     yield effects.put(addGoal(wasSuccessful));
     yield effects.put(setGoalRequestSuccess(wasSuccessful));
     yield effects.put(clearGoalRequestError());
+  }
+}
+
+export function* getEditableGoalFlow(request) {
+  yield effects.put(clearGoalRequestError());
+  yield effects.put(clearGoalRequestSuccess());
+  const wasSuccessful = yield effects.call(getGoalCall, request.data);
+  if (wasSuccessful) {
+    yield effects.put(clearGoalRequestError());
+    yield effects.put(addGoal(wasSuccessful));
+    // do not set request success for editing goals, simply populate form fields
+    yield effects.put(setGoalName(wasSuccessful.name));
+    yield effects.put(setGoalTag(wasSuccessful.tag));
+    yield effects.put(setGoalAdditionalInfo(wasSuccessful.additional_info));
+    yield effects.put(setGoalID(wasSuccessful.id));
   }
 }
 
@@ -131,6 +154,13 @@ export function* updateGoalFlow(request) {
     yield effects.put(addGoal(wasSuccessful));
     yield effects.put(setGoalRequestSuccess(wasSuccessful));
     yield effects.put(clearGoalRequestError());
+    yield effects.put(
+      addAppMessage({
+        context: "success",
+        header: "Goal",
+        content: "Successfully updated the goal!"
+      })
+    );
   }
 }
 
@@ -156,6 +186,14 @@ export function* deleteGoalFlow(request) {
   if (wasSuccessful) {
     yield effects.put(removeGoal(id));
     yield effects.put(setGoalRequestSuccess(wasSuccessful));
+    yield effects.put(setGoalID(id));
     yield effects.put(clearGoalRequestError());
+    yield effects.put(
+      addAppMessage({
+        context: "success",
+        header: "Goal",
+        content: "Successfully deleted the goal!"
+      })
+    );
   }
 }

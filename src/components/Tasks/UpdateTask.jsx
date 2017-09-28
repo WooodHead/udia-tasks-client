@@ -25,9 +25,9 @@ import {
 } from "../../modules/goals/reducer.actions";
 import { getGoalsRequest } from "../../modules/goals/sagas.actions";
 
-class EditTask extends Component {
+class UpdateTask extends Component {
   componentWillMount() {
-    document.title = "Edit Task - UDIA";
+    document.title = "Update Task - UDIA";
     const id = this.props.match.params.id;
     this.props.dispatch(getGoalsRequest({}));
     this.props.dispatch(clearTaskRequestError());
@@ -117,7 +117,7 @@ class EditTask extends Component {
       goalIDs
     } = tasks;
     const goalsList = this.props.goals.goals;
-    console.log(goalIDs, goalsList)
+    document.title = `${name} - UDIA`;
     let goalOptions = [];
     Object.entries(goalsList).forEach(([key, value]) => {
       goalOptions.push({
@@ -131,12 +131,16 @@ class EditTask extends Component {
 
     if (!auth.userToken) {
       return <Redirect to="/auth/signin" />;
+    } else if (!!taskRequestSuccess) {
+      const taskID = taskRequestSuccess.id;
+      return <Redirect to={`/tasks/${taskID}`} />;
     }
     return (
       <TaskFormView
-        headerText={"Edit Task"}
-        submitText={"Edit Task"}
-        successText={"Your task has been edited."}
+        headerText={"Update Task"}
+        submitText={"Save Changes"}
+        successText={"Your task has been updated."}
+        failureText={"Update Task Failed!"}
         isSendingTaskRequest={isSendingTaskRequest}
         taskRequestError={taskRequestError}
         taskRequestSuccess={taskRequestSuccess}
@@ -163,4 +167,4 @@ function mapStateToProps(state) {
   return { auth: state.auth, tasks: state.tasks, goals: state.goals };
 }
 
-export default connect(mapStateToProps)(EditTask);
+export default connect(mapStateToProps)(UpdateTask);

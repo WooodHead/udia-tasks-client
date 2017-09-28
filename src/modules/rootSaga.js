@@ -23,6 +23,7 @@ import {
   CREATE_GOAL_REQUEST,
   GET_GOALS_REQUEST,
   GET_GOAL_REQUEST,
+  GET_EDITABLE_GOAL_REQUEST,
   UPDATE_GOAL_REQUEST,
   DELETE_GOAL_REQUEST
 } from "./goals/constants";
@@ -30,6 +31,7 @@ import {
   createGoalFlow,
   getGoalsFlow,
   getGoalFlow,
+  getEditableGoalFlow,
   updateGoalFlow,
   deleteGoalFlow
 } from "./goals/sagas";
@@ -64,6 +66,7 @@ export default function* rootSaga() {
   yield effects.takeLatest(CREATE_GOAL_REQUEST, createGoalFlow);
   yield effects.takeLatest(GET_GOALS_REQUEST, getGoalsFlow);
   yield effects.takeLatest(GET_GOAL_REQUEST, getGoalFlow);
+  yield effects.takeLatest(GET_EDITABLE_GOAL_REQUEST, getEditableGoalFlow);
   yield effects.takeLatest(UPDATE_GOAL_REQUEST, updateGoalFlow);
   yield effects.takeLatest(DELETE_GOAL_REQUEST, deleteGoalFlow);
   // Tasks related sagas

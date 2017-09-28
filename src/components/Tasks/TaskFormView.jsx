@@ -4,6 +4,7 @@ import {
   Dropdown,
   Form,
   Header,
+  Label,
   Message,
   Rating
 } from "semantic-ui-react";
@@ -13,6 +14,7 @@ const TaskFormView = ({
   headerText,
   submitText,
   successText,
+  failureText,
   isSendingTaskRequest,
   taskRequestError,
   taskRequestSuccess,
@@ -67,6 +69,15 @@ const TaskFormView = ({
           maxRating={maxRating}
           onRate={changeTimeDifficulty}
         />
+        <Label pointing="left">
+          {"This will take "}
+          {timeDifficulty === 1 && "< 1hr"}
+          {timeDifficulty === 2 && "1-2hrs"}
+          {timeDifficulty === 3 && "2-4hrs"}
+          {timeDifficulty === 4 && "4-8hrs"}
+          {timeDifficulty === 5 && "> 8hrs"}
+          {"."}
+        </Label>
       </Form.Field>
       <Form.Field>
         <label>Energy Difficulty</label>
@@ -76,6 +87,15 @@ const TaskFormView = ({
           maxRating={maxRating}
           onRate={changeEnergyDifficulty}
         />
+        <Label pointing="left">
+          {"This will take "}
+          {energyDifficulty === 1 && "no energy"}
+          {energyDifficulty === 2 && "a bit of energy"}
+          {energyDifficulty === 3 && "moderate energy"}
+          {energyDifficulty === 4 && "a lot of energy"}
+          {energyDifficulty === 5 && "all of my energy"}
+          {"."}
+        </Label>
       </Form.Field>
       <Form.Field>
         <label>Focus Difficulty</label>
@@ -85,8 +105,17 @@ const TaskFormView = ({
           maxRating={maxRating}
           onRate={changeFocusDifficulty}
         />
+        <Label pointing="left">
+          {"This will take "}
+          {focusDifficulty === 1 && "no attention"}
+          {focusDifficulty === 2 && "a bit of attention"}
+          {focusDifficulty === 3 && "concentration"}
+          {focusDifficulty === 4 && "focused concentration"}
+          {focusDifficulty === 5 && "complete concentration"}
+          {"."}
+        </Label>
       </Form.Field>
-      <Error header="Create Task Request Failed!" error={taskRequestError} />
+      <Error header={failureText || "Task Request Failed!"} error={taskRequestError} />
       <Message success>
         <Message.Header>Success!</Message.Header>
         <p>{successText || "Your task action was completed."}</p>

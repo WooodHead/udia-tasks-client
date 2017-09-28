@@ -20,6 +20,7 @@ import {
 } from "./reducer.actions";
 import { getTasksRequest } from "./sagas.actions";
 import { createTask, getTask, getTasks, updateTask, deleteTask } from "./api";
+import { addAppMessage } from "../messages/reducer.actions";
 
 function* createTaskCall(postBody) {
   yield effects.put(isSendingTaskRequest(true));
@@ -67,6 +68,13 @@ export function* createTaskFlow(request) {
     yield effects.put(setTaskGoalIDs([]));
     yield effects.put(setTaskAdditionalInfo({}));
     yield effects.put(addTask(wasSuccessful));
+    yield effects.put(
+      addAppMessage({
+        context: "success",
+        header: "Task",
+        content: "Successfully created the task!"
+      })
+    );
   }
 }
 
@@ -147,6 +155,7 @@ export function* getEditableTaskFlow(request) {
     yield effects.put(setTaskEnergyDifficulty(wasSuccessful.energy_difficulty));
     yield effects.put(setTaskFocusDifficulty(wasSuccessful.focus_difficulty));
     yield effects.put(
+      // task goal ids are returned as numbers, but strings are expected
       setTaskGoalIDs(wasSuccessful.goal_ids.map(val => `${val}`))
     );
     yield effects.put(setTaskAdditionalInfo(wasSuccessful.additional_info));
@@ -195,6 +204,13 @@ export function* updateTaskFlow(request) {
     yield effects.put(addTask(wasSuccessful));
     yield effects.put(setTaskRequestSuccess(wasSuccessful));
     yield effects.put(clearTaskRequestError());
+    yield effects.put(
+      addAppMessage({
+        context: "success",
+        header: "Task",
+        content: "Successfully updated the task!"
+      })
+    );
   }
 }
 
@@ -220,6 +236,14 @@ export function* deleteTaskFlow(request) {
   if (wasSuccessful) {
     yield effects.put(removeTask(id));
     yield effects.put(setTaskRequestSuccess(wasSuccessful));
+    yield effects.put(setTaskID(id));
     yield effects.put(clearTaskRequestError());
+    yield effects.put(
+      addAppMessage({
+        context: "success",
+        header: "Task",
+        content: "Successfully deleted the task!"
+      })
+    );
   }
 }
