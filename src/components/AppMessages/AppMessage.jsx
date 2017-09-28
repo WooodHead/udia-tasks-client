@@ -14,6 +14,13 @@ class AppMessage extends Component {
     this.setState({ intervalId });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.state.intervalId) {
+      clearInterval(this.state.intervalId);
+      this.setState({ intervalId: setInterval(this.props.onDismiss, 4000) });
+    }
+  }
+
   componentWillUnmount() {
     if (this.state.intervalId) {
       clearInterval(this.state.intervalId);

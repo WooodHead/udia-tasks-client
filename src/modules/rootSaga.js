@@ -51,6 +51,8 @@ import {
   updateTaskFlow,
   deleteTaskFlow
 } from "./tasks/sagas";
+import { CREATE_TASK_ACTION_REQUEST } from "./taskActions/constants";
+import { createTaskActionFlow } from "./taskActions/sagas";
 
 export default function* rootSaga() {
   // Authentication related sagas
@@ -76,4 +78,6 @@ export default function* rootSaga() {
   yield effects.takeLatest(GET_EDITABLE_TASK_REQUEST, getEditableTaskFlow);
   yield effects.takeLatest(UPDATE_TASK_REQUEST, updateTaskFlow);
   yield effects.takeLatest(DELETE_TASK_REQUEST, deleteTaskFlow);
+  // Task Actions related sagas
+  yield effects.takeLatest(CREATE_TASK_ACTION_REQUEST, createTaskActionFlow);
 }

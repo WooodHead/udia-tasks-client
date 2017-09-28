@@ -26,3 +26,28 @@ export const GET_TASK_REQUEST = "GET_TASK_REQUEST";
 export const GET_EDITABLE_TASK_REQUEST = "GET_EDITABLE_TASK_REQUEST";
 export const UPDATE_TASK_REQUEST = "UPDATE_TASK_REQUEST";
 export const DELETE_TASK_REQUEST = "DELETE_TASK_REQUEST";
+
+// Variable Constants
+export const TIME_DIFFICULTY = {
+  1: "< 1hr",
+  2: "1-2hrs",
+  3: "2-4hrs",
+  4: "4-8hrs",
+  5: "> 8hrs"
+};
+
+export const ENERGY_DIFFICULTY = {
+  1: "little to no energy",
+  2: "a bit of energy",
+  3: "moderate energy",
+  4: "a lot of energy",
+  5: "all of my energy"
+};
+
+export const FOCUS_DIFFICULTY = {
+  1: "little to no attention",
+  2: "a bit of attention",
+  3: "concentration",
+  4: "focused concentration",
+  5: "complete concentration"
+};

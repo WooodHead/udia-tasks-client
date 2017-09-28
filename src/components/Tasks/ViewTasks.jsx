@@ -8,6 +8,12 @@ import {
   clearTaskRequestSuccess
 } from "../../modules/tasks/reducer.actions";
 import { getTasksRequest } from "../../modules/tasks/sagas.actions";
+import {
+  TIME_DIFFICULTY,
+  ENERGY_DIFFICULTY,
+  FOCUS_DIFFICULTY
+} from "../../modules/tasks/constants";
+import { ACTION_TYPE } from "../../modules/taskActions/constants";
 
 class ViewTasks extends Component {
   componentWillMount() {
@@ -42,27 +48,19 @@ const ViewTasksView = ({ tasks, tasksOrdering }) => (
               <Item.Header>
                 <Link to={`/tasks/${task.id}`}>{task.name}</Link>
               </Item.Header>
+              {task.actions.length > 0 &&
+                <Item.Meta>
+                  {ACTION_TYPE[task.actions[0].action]}
+                </Item.Meta>}
               <Item.Description>
                 {"Time: "}
-                {task.time_difficulty === 1 && "< 1hr"}
-                {task.time_difficulty === 2 && "1-2hrs"}
-                {task.time_difficulty === 3 && "2-4hrs"}
-                {task.time_difficulty === 4 && "4-8hrs"}
-                {task.time_difficulty === 5 && "> 8hrs"}
+                {TIME_DIFFICULTY[task.time_difficulty] || "unset"}
                 <br />
                 {"Energy: "}
-                {task.energy_difficulty === 1 && "no energy"}
-                {task.energy_difficulty === 2 && "a bit of energy"}
-                {task.energy_difficulty === 3 && "moderate energy"}
-                {task.energy_difficulty === 4 && "a lot of energy"}
-                {task.energy_difficulty === 5 && "all of my energy"}
+                {ENERGY_DIFFICULTY[task.energy_difficulty] || "unset"}
                 <br />
                 {"Focus: "}
-                {task.focus_difficulty === 1 && "no attention"}
-                {task.focus_difficulty === 2 && "a bit of attention"}
-                {task.focus_difficulty === 3 && "concentration"}
-                {task.focus_difficulty === 4 && "focused concentration"}
-                {task.focus_difficulty === 5 && "complete concentration"}
+                {FOCUS_DIFFICULTY[task.focus_difficulty] || "unset"}
               </Item.Description>
               {task.goals &&
                 task.goals.length > 0 &&

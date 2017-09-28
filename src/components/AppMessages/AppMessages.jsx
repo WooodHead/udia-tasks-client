@@ -6,10 +6,8 @@ import { deleteAppMessage } from "../../modules/messages/reducer.actions";
 import AppMessage from "./AppMessage";
 
 class AppMessages extends Component {
-  dismissMessage = index => {
-    return () => {
-      this.props.dispatch(deleteAppMessage(index));
-    };
+  dismissMessage = index => () => {
+    this.props.dispatch(deleteAppMessage(index));
   };
 
   render() {

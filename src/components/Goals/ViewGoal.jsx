@@ -50,7 +50,7 @@ class ViewGoal extends Component {
       goalRequestSuccess &&
       currentGoalID
     ) {
-      return <Redirect to="/goals" />
+      return <Redirect to="/goals" />;
     }
     return <ViewGoalView goal={goal} deleteGoal={this.deleteGoal} />;
   }
@@ -82,11 +82,16 @@ const ViewGoalView = ({ goal, deleteGoal }) => (
             <Popup
               trigger={<a>Delete Goal</a>}
               content={
-                <Button
-                  color="red"
-                  content="Confirm Delete Goal"
-                  onClick={deleteGoal}
-                />
+                <div>
+                  <p>
+                    Are you sure you want to delete this goal? This cannot be undone.
+                  </p>
+                  <Button
+                    color="red"
+                    content="Confirm Delete Goal"
+                    onClick={deleteGoal}
+                  />
+                </div>
               }
               on="click"
               position="top center"

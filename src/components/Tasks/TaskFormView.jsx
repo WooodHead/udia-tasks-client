@@ -89,7 +89,7 @@ const TaskFormView = ({
         />
         <Label pointing="left">
           {"This will take "}
-          {energyDifficulty === 1 && "no energy"}
+          {energyDifficulty === 1 && "little to no energy"}
           {energyDifficulty === 2 && "a bit of energy"}
           {energyDifficulty === 3 && "moderate energy"}
           {energyDifficulty === 4 && "a lot of energy"}
@@ -107,7 +107,7 @@ const TaskFormView = ({
         />
         <Label pointing="left">
           {"This will take "}
-          {focusDifficulty === 1 && "no attention"}
+          {focusDifficulty === 1 && "little to no attention"}
           {focusDifficulty === 2 && "a bit of attention"}
           {focusDifficulty === 3 && "concentration"}
           {focusDifficulty === 4 && "focused concentration"}
