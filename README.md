@@ -1,18 +1,18 @@
-# Udia Client
+# Udia Tasks Client
 
 ![UDIA](logo.png)
 
 **Universal Dream | Infinite Awareness**
 
-* The public client can be found at [https://www.udia.ca](https://www.udia.ca)
-* The public facing API is at [udia-software/udia-server](https://github.com/udia-software/udia-server) and can be found at [https://udia-server.herokuapp.com/](https://udia-server.herokuapp.com/).
+* The public client can be found at [https://tasks.udia.ca](https://tasks.udia.ca)
+* The public facing API is at [udia-software/udia-tasks-server](https://github.com/udia-software/udia-tasks-server) and can be found at [https://udia-tasks-server.herokuapp.com/](https://udia-tasks-server.herokuapp.com/).
 
 ## Quickstart (Development)
 
 To start the client locally:
 
   * Ensure the server is up and running locally!
-    * Server: [udia-software/udia-server](https://github.com/udia-software/udia-server)
+    * Server: [udia-software/udia-tasks-server](https://github.com/udia-software/udia-tasks-server)
   * Install dependencies with `yarn install`
   * Run the client with `yarn start`
 
@@ -34,7 +34,7 @@ The environment variables are embedded during the build time. For more informati
 To build the production instance of this application, run the following:
 
 ```bash
-export REACT_APP_API_ENDPOINT="https://udia-server.herokuapp.com/api" && yarn build
+export REACT_APP_API_ENDPOINT="https://udia-tasks-server.herokuapp.com/api" && yarn build
 ```
 
 You can then serve the production site locally:
@@ -46,7 +46,7 @@ serve -s build --port 3000
 
 The following script will deploy the contents of `/build` to AWS S3:
 ```bash
-aws s3 sync build/ s3://udia-client --delete
+aws s3 sync build/ s3://udia-tasks-client --delete
 ```
 * the `--delete` flag removes the old minified js files that are no longer used.
 

@@ -16,7 +16,8 @@ const Home = () => {
         </Header>
       </Segment>
       <Container>
-        In a constant pursuit of meaning in life, we stumble into serendipity.
+        In a constant pursuit of meaning in life, we stumble into serendipity. <br/>
+        A task tracking application with goals. Written using ReactJS and Python.
       </Container>
     </div>
   );
