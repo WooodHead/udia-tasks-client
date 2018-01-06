@@ -1,5 +1,7 @@
 # Udia Tasks Client
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/udia-software/udia-tasks-client.svg)](https://greenkeeper.io/)
+
 ![UDIA](logo.png)
 
 **Universal Dream | Infinite Awareness**
